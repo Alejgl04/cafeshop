@@ -6,11 +6,12 @@ import { BannerAreaComponent } from '../components/banner-area/banner-area.compo
 import { NavbarComponent } from '../shared/navbar/navbar.component';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { AboutComponent } from '../components/about/about.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [RouterModule, CommonModule, NavbarComponent, BannerAreaComponent, ReviewComponent, MenuAreaComponent, FooterComponent],
+  imports: [RouterModule, CommonModule, NavbarComponent, BannerAreaComponent, ReviewComponent, MenuAreaComponent, FooterComponent, AboutComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })

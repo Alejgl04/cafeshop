@@ -1,0 +1,25 @@
+<div class="parallax-effect-container">
+  <div class="parallax-effect-image" style="background-image: url(assets/img/bg2.2.jpg)"></div>
+  <div class="parallax-effect-content">
+    <h2 class="text-center invert">DID YOU KNOW? </h2>
+    <h3 class="text-white invert__subtext">About our restaurant:</h3>
+    <div>
+      <div class="container">
+        <div class="row">
+          @for (item of service; track $index) {
+            <div class="col-lg-3 col-md-3 col-sm-6 col-6 m-b30 text-center">
+              <div class="icon-bx-wraper center text-white service-box">
+                  <div class="icon-bx-xl">
+                      <span class="icon-cell"><img src="assets/img/icons/{{item.image}}" [alt]=item.title height="80px"></span>
+                  </div>
+                  <div class="icon-content">
+                      <h5 class="dlab-tilte mt-10">{{item.title}}</h5>
+                  </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
