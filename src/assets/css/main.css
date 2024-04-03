@@ -4,7 +4,7 @@
 /* Mobile Layout: 320px */
 /* Wide Mobile Layout: 480px */
 /* =================================== */
-/*  Basic Style 
+/*  Basic Style
 /* =================================== */
 ::-moz-selection {
   /* Code for Firefox */
@@ -2282,10 +2282,10 @@ body.mobile-nav-active #mobile-nav-toggle {
   bottom: 0;
 }
 
-.banner-area {
+/* .banner-area {
   background: url(../img/header-bg.jpg) center;
   background-size: cover;
-}
+} */
 
 @media (max-width: 1199.98px) {
   .banner-area .fullscreen {
@@ -2448,7 +2448,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   width: 100%;
 }
 
-.review-area {
+.review-area, .sign-up-area {
   background-color: #b68834;
   color: #fff;
 }
