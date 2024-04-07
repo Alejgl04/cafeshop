@@ -3,6 +3,7 @@ import { SignUpComponent } from './auth/pages/sign-up/sign-up.component';
 import { SignInComponent } from './auth/pages/sign-in/sign-in.component';
 import { HomeComponent } from './home/home.component';
 import { ForgotPasswordComponent } from './auth/pages/forgot-password/forgot-password.component';
+import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 
 export const routes: Routes = [
   {
@@ -34,4 +35,18 @@ export const routes: Routes = [
       }
     ],
   },
+  {
+    path: 'admin',
+    loadComponent: () => import('./admin/admin.component').then( m => m.AdminComponent ),
+    children: [
+      {
+        path: 'dashboard',
+        title: 'CafeZone | Admin Dashboard ',
+        component: DashboardComponent,
+      },
+      {
+        path:'', redirectTo: 'dashboard', pathMatch: 'full',
+      }
+    ],
+  }
 ];

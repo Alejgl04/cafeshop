@@ -4,24 +4,52 @@
     Already have an account? <a routerLink="/auth/sign-in/" routerLinkActive="router-link-active">Sign in</a>
   </h6>
   <hr>
-  <form autocomplete="off">
+  <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="onSubmit();">
     <div class="form-group">
       <label for="fullName">Name (Full name)</label>
-      <input type="text" class="form-control" id="fullName">
+      <input type="text" class="form-control" id="fullName" formControlName="fullName">
+      @if (isValidField('fullName')) {
+        <p class="form-text text-danger">
+          {{getFieldError('fullName')}}
+        </p>
+      }
     </div>
     <div class="form-group">
       <label for="email">Email address</label>
-      <input type="email" class="form-control" id="email" aria-describedby="emailHelp">
+      <input type="email" class="form-control" id="email" formControlName="email" aria-describedby="emailHelp">
       <small id="emailHelp" class="form-text text-muted text-white">We'll never share your email with anyone else.</small>
+      @if (isValidField('email')) {
+        <p class="form-text text-danger">
+          {{getFieldError('email')}}
+        </p>
+      }
     </div>
     <div class="form-group">
       <label for="exampleInputPhone">Phone</label>
-      <input type="text" class="form-control" id="exampleInputPhone">
+      <input type="text" class="form-control" id="exampleInputPhone" formControlName="phone">
+      @if (isValidField('email')) {
+        <p class="form-text text-danger">
+          {{getFieldError('email')}}
+        </p>
+      }
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1">
+      <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
+      @if (isValidField('password')) {
+        <p class="form-text text-danger">
+          {{getFieldError('password')}}
+        </p>
+      }
     </div>
     <button type="submit" class="btn btn-default form__submit-auth w-100">Submit</button>
+
+    @if ( isLoading ) {
+      <div class="mt-2">
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+      </div>
+    }
+    <span matSnackBarLabel> </span>
+
   </form>
 </div>
