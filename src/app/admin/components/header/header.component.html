@@ -1,0 +1,28 @@
+<mat-drawer-container class="example-container" autosize>
+  <mat-drawer #drawer
+    class="example-sidenav"
+    mode="side"
+    opened="false">
+    <mat-toolbar class="header">
+      <div>Your Logo</div>
+      <mat-icon class="close"
+     (click)="drawer.close()">close</mat-icon>
+    </mat-toolbar>
+    <div class="contents p-3 m-2">
+      Drawer
+
+    </div>
+  </mat-drawer>
+
+  <mat-toolbar class="main header">
+    <mat-icon
+      (click)="drawer.toggle()">
+      menu
+    </mat-icon>
+    <div> CafeShop | Panel Admin</div>
+  </mat-toolbar>
+
+  <div class="main contents">
+    <router-outlet/>
+  </div>
+</mat-drawer-container>

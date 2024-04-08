@@ -1,0 +1,36 @@
+.drawer {
+  position: fixed;
+  height: 100vh;
+  min-width: 30%;
+  border-right: 1px solid #ccc;
+}
+.drawer .header {
+  position: absolute;
+  right: 0;
+  justify-content: space-between;
+}
+.drawer .contents {
+  padding: 16px;
+}
+
+.main.header {
+  background-color: #673ab7;
+  color: #fff;
+}
+
+.main.header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 2;
+  border-bottom: 1px solid #ccc;
+
+}
+
+.main.contents {
+  min-height: 100vh;
+  margin-top: 64px; /* height of header */
+  padding: 16px;
+}
+
+
