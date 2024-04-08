@@ -26,11 +26,10 @@ export class AuthService {
 
   constructor() {
     this.checkAuthStatus().subscribe();
-    console.log('constructor');
+    console.log(this.authStatus());
   }
 
   private setAuthentication( user: User, token: string ): boolean {
-
     this._currentUser.set( user );
     this._authStatus.set( AuthStatus.authenticated );
     this.storeTokens(token);
