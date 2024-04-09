@@ -6,6 +6,7 @@ import { ForgotPasswordComponent } from './auth/pages/forgot-password/forgot-pas
 import { DashboardComponent } from './admin/pages/dashboard/dashboard.component';
 import { authGuard } from './auth/guard/auth.guard';
 import { checkAuthSignInGuard } from './auth/guard/checkAuthSignIn.guard';
+import { AdminComponent } from './admin/admin.component';
 
 export const routes: Routes = [
   {
@@ -41,7 +42,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [authGuard],
-    loadComponent: () => import('./admin/admin.component').then( m => m.AdminComponent ),
+    component: AdminComponent,
     children: [
       {
         path: 'dashboard',
