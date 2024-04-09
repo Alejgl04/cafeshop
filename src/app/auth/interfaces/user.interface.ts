@@ -1,5 +1,5 @@
 export interface User {
-  ok:       boolean;
+  // ok:       boolean;
   fullName: string;
   phone:    string;
   email:    string;

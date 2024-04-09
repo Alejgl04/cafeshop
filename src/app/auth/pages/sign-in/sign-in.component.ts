@@ -42,7 +42,7 @@ export class SignInComponent {
         this.isLoading = false;
       },
       complete: () => {
-        this.signInForm.reset();
+        // this.signInForm.reset();
         this.router.navigateByUrl('/admin');
       },
       error: error => {

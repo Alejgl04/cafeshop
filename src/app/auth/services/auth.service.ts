@@ -1,7 +1,7 @@
 import { Injectable, computed, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, catchError, map, of, throwError } from 'rxjs';
+import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 import { environment } from '../../../environments/environment.development';
 
@@ -26,7 +26,6 @@ export class AuthService {
 
   constructor() {
     this.checkAuthStatus().subscribe();
-    console.log(this.authStatus());
   }
 
   private setAuthentication( user: User, token: string ): boolean {
@@ -37,14 +36,16 @@ export class AuthService {
 
   }
 
-  sigIn( email: string, password: string ): Observable<Boolean> {
+  sigIn( email: string, password: string ) {
     const url = `${this.apiUrl}/auth/sign-in`;
     const dataUser = { email, password };
 
     return this.http.post<SignInResponse>(url, dataUser)
       .pipe(
-        map( ({ user, token }) => this.setAuthentication(user, token)),
-        catchError( error => throwError( () => error.error.message ))
+        map( ({user, token}) => {
+          this.setAuthentication(user, token)
+        }),
+        catchError( error => throwError( () => error.error ))
       )
   }
 
@@ -53,7 +54,9 @@ export class AuthService {
 
     return this.http.post<RegisterResponse>(url, user)
       .pipe(
-        map( ({ user, token }) => this.setAuthentication(user, token)),
+        map( ({user, token}) => {
+          this.setAuthentication(user, token)
+        }),
         catchError( error => throwError( () => error.error.message ))
       )
   }
@@ -70,7 +73,7 @@ export class AuthService {
 
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
-        map( ({ token, user }) => this.setAuthentication(user, token)),
+        map( ({ user, token }) => this.setAuthentication(user, token)),
         catchError(() => {
           this._authStatus.set( AuthStatus.notAuthenticated )
           return of(false)
