@@ -45,7 +45,7 @@ export class AuthService {
         map( ({user, token}) => {
           this.setAuthentication(user, token)
         }),
-        catchError( error => throwError( () => error.error ))
+        catchError( error => throwError( () => error.error.message ))
       )
   }
 

@@ -7,6 +7,10 @@ import { DashboardComponent } from './admin/pages/dashboard/dashboard.component'
 import { authGuard } from './auth/guard/auth.guard';
 import { checkAuthSignInGuard } from './auth/guard/checkAuthSignIn.guard';
 import { AdminComponent } from './admin/admin.component';
+import { UsersComponent } from './admin/pages/users/users.component';
+import { ProductsComponent } from './admin/pages/products/products.component';
+import { CategoriesComponent } from './admin/pages/categories/categories.component';
+import { BillsComponent } from './admin/pages/bills/bills.component';
 
 export const routes: Routes = [
   {
@@ -45,9 +49,29 @@ export const routes: Routes = [
     component: AdminComponent,
     children: [
       {
+        path: 'users',
+        title: 'CafeZone | User Panel',
+        component: UsersComponent,
+      },
+      {
         path: 'dashboard',
-        title: 'CafeZone | Admin Dashboard ',
+        title: 'CafeZone | Dashboard Panel',
         component: DashboardComponent,
+      },
+      {
+        path: 'products',
+        title: 'CafeZone | Product Panel',
+        component: ProductsComponent,
+      },
+      {
+        path: 'categories',
+        title: 'CafeZone | Category Panel',
+        component: CategoriesComponent,
+      },
+      {
+        path: 'bills',
+        title: 'CafeZone | Bill Panel',
+        component: BillsComponent,
       },
       {
         path:'', redirectTo: 'dashboard', pathMatch: 'full',

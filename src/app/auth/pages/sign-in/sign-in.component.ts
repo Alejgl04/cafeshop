@@ -38,11 +38,11 @@ export class SignInComponent {
     this.authService.sigIn( email, password )
     .subscribe({
       next: value => {
-        this.messagesService.authRegisterMesage(`${value}, Sign In successfully`);
+        this.messagesService.authRegisterMesage(`Sign In successfully`);
         this.isLoading = false;
       },
       complete: () => {
-        // this.signInForm.reset();
+        this.signInForm.reset();
         this.router.navigateByUrl('/admin');
       },
       error: error => {

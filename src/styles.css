@@ -41,6 +41,10 @@ input[type="color"]:focus,
   outline: 0 none;
 }
 
+button:focus {
+  border-color: #b68834!important;
+}
+
 /*==== LOADING ====*/
 #loading-area {
   width: 100%;
@@ -67,4 +71,10 @@ input[type="color"]:focus,
 
 .p_text {
   color: var(--main-color);
+}
+
+.bg-admin {
+  background-color: var(--main-color);
+  padding: 2rem;
+  color: white;
 }

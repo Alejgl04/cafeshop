@@ -11,7 +11,4 @@ import { CommonModule } from '@angular/common';
 })
 export class DashboardComponent {
 
-  private authService = inject(AuthService);
-  public currentUser = computed( () => this.authService.currentUser() );
-
 }

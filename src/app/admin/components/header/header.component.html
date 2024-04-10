@@ -9,8 +9,20 @@
      (click)="drawer.close()">close</mat-icon>
     </mat-toolbar>
     <div class="contents p-3 m-2">
-      Drawer
-
+      <mat-list class="">
+        @for (item of menuItems; track $index) {
+          <mat-list-item>
+            <a
+            [routerLink]="item.route"
+            routerLinkActive="bg-admin"
+            >
+            <mat-icon aria-hidden="false" fontIcon="{{item.icon}}"></mat-icon>
+            {{item.text}}
+            </a>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+        }
+      </mat-list>
     </div>
   </mat-drawer>
 
@@ -20,7 +32,19 @@
       menu
     </mat-icon>
     <div> CafeShop | Panel Admin</div>
+    <div>
+      {{currentUser()?.fullName}}
+
+      <button
+        mat-button
+        color="accent"
+        (click)="onLogout();"
+      >Log out</button>
+    </div>
   </mat-toolbar>
+  <div class="justify-content-end">
+
+  </div>
 
   <div class="main contents">
     <router-outlet/>
