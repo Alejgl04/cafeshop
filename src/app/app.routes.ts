@@ -44,6 +44,9 @@ export const routes: Routes = [
     ],
   },
   {
+    path:'', redirectTo: '', pathMatch: 'full',
+  },
+  {
     path: 'admin',
     canActivate: [authGuard],
     component: AdminComponent,
