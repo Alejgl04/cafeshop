@@ -8,7 +8,7 @@ export class MessagesService {
 
   constructor(private _snackBar: MatSnackBar) {}
 
-  authRegisterMesage( message: string ) {
+  authMessages( message: string ) {
     this._snackBar.open(message, 'Accept');
   }
 
