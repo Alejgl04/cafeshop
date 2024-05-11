@@ -33,7 +33,6 @@ export class AppComponent {
       return;
 
       case AuthStatus.notAuthenticated:
-        this.router.navigateByUrl('/')
       return;
     }
   })}
