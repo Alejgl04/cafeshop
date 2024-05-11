@@ -11,6 +11,7 @@ import { UsersComponent } from './admin/pages/users/users.component';
 import { ProductsComponent } from './admin/pages/products/products.component';
 import { CategoriesComponent } from './admin/pages/categories/categories.component';
 import { BillsComponent } from './admin/pages/bills/bills.component';
+import { ResetPasswordComponent } from './auth/pages/reset-password/reset-password.component';
 
 export const routes: Routes = [
   {
@@ -37,6 +38,11 @@ export const routes: Routes = [
         path: 'forgot-password',
         title: 'CafeZone | Forgot Password',
         component: ForgotPasswordComponent,
+      },
+      {
+        path: 'reset-password/:id',
+        title: 'CafeZone | Forgot Password',
+        component: ResetPasswordComponent,
       },
       {
         path:'', redirectTo: 'sign-in', pathMatch: 'full',
