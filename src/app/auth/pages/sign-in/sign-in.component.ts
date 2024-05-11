@@ -6,6 +6,7 @@ import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AuthService } from '../../services/auth.service';
 import { MessagesService } from '../../../services/messages.service';
+import { ValidatorsService } from '../../../services/validators.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -19,6 +20,8 @@ export class SignInComponent {
   private authService = inject( AuthService );
   private messagesService = inject( MessagesService );
   private router      = inject( Router );
+  private validMessages  = inject( ValidatorsService );
+
 
   public isLoading: boolean = false;
 
@@ -38,7 +41,7 @@ export class SignInComponent {
     this.authService.sigIn( email, password )
     .subscribe({
       next: value => {
-        this.messagesService.authRegisterMesage(`Sign In successfully`);
+        this.messagesService.authMessages(`Sign In successfully`);
         this.isLoading = false;
       },
       complete: () => {
@@ -46,34 +49,17 @@ export class SignInComponent {
         this.router.navigateByUrl('/admin');
       },
       error: error => {
-        this.messagesService.authRegisterMesage(`${error}`);
+        this.messagesService.authMessages(`${error}`);
         this.isLoading = false;
       }
     })
   }
 
   isValidField( field: string ): boolean | null {
-    return this.signInForm.controls[field].errors
-      && this.signInForm.controls[field].touched;
+    return this.validMessages.isValidField( this.signInForm, field);
   }
 
   getFieldError( field: string ): string | null {
-
-    if ( !this.signInForm.controls[field] ) return null;
-
-    const errors = this.signInForm.controls[field].errors || {};
-    for (const key of Object.keys(errors)) {
-      switch( key ) {
-        case 'required':
-          return `The ${field} field is required`;
-
-        case 'minlength':
-          return `Minimum ${errors['minlength'].requiredLength} characters`;
-
-        case 'email':
-          return `The ${field} field needs to be an valid email`;
-      }
-    }
-    return null;
+    return this.validMessages.getFieldError( this.signInForm, field)
   }
 }

@@ -7,6 +7,7 @@ import { MatSnackBarLabel } from '@angular/material/snack-bar';
 
 import { AuthService } from '../../services/auth.service';
 import { MessagesService } from '../../../services/messages.service';
+import { ValidatorsService } from '../../../services/validators.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -20,6 +21,8 @@ export class SignUpComponent {
   private authService = inject( AuthService );
   private messagesService = inject( MessagesService );
   private router      = inject( Router );
+  private validMessages  = inject( ValidatorsService );
+
 
   public isLoading: boolean = false;
 
@@ -40,7 +43,7 @@ export class SignUpComponent {
     this.authService.register( this.registerForm.value )
     .subscribe({
       next: value => {
-        this.messagesService.authRegisterMesage(`${value}, Sign up successfully`);
+        this.messagesService.authMessages(`${value}, Sign up successfully`);
         this.isLoading = false;
       },
       complete: () => {
@@ -48,34 +51,17 @@ export class SignUpComponent {
         this.router.navigateByUrl('/admin');
       },
       error: error => {
-        this.messagesService.authRegisterMesage(`${error}`);
+        this.messagesService.authMessages(`${error}`);
         this.isLoading = false;
       }
     })
   }
 
   isValidField( field: string ): boolean | null {
-    return this.registerForm.controls[field].errors
-      && this.registerForm.controls[field].touched;
+    return this.validMessages.isValidField( this.registerForm, field);
   }
 
   getFieldError( field: string ): string | null {
-
-    if ( !this.registerForm.controls[field] ) return null;
-
-    const errors = this.registerForm.controls[field].errors || {};
-    for (const key of Object.keys(errors)) {
-      switch( key ) {
-        case 'required':
-          return `The ${field} field is required`;
-
-        case 'minlength':
-          return `Minimum ${errors['minlength'].requiredLength} characters`;
-
-        case 'email':
-          return `The ${field} field needs to be an valid email`;
-      }
-    }
-    return null;
+    return this.validMessages.getFieldError( this.registerForm, field)
   }
 }
