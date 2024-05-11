@@ -16,8 +16,8 @@ export class ValidatorsService {
       const secondFieldValue = formGroup.get(secondField)?.value;
 
       if ( firstFieldValue !== secondFieldValue ) {
-        formGroup.get( secondField )?.setErrors({ notEqual: true });
-        return { notEqual: true }
+        formGroup.get( secondField )?.setErrors({ rePassword: true });
+        return { rePassword: true }
       }
       formGroup.get( secondField )?.setErrors(null);
       return null;
@@ -43,6 +43,10 @@ export class ValidatorsService {
 
         case 'email':
           return `The ${field} field needs to be an valid email`;
+
+        case 'rePassword':
+          return `Passwords do not match`
+
       }
     }
     return null;
