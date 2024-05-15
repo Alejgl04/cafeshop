@@ -5,7 +5,7 @@ import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
 
 import { environment } from '../../../environments/environment.development';
 
-import { AuthStatus, CheckTokenResponse, RegisterResponse, SignInResponse, User } from '../interfaces/';
+import { AuthStatus, CheckTokenResponse, ForgotPassword, PasswordContent, RegisterResponse, ResetPassword, SignInResponse, User } from '../interfaces/';
 
 @Injectable({
   providedIn: 'root'
@@ -95,6 +95,26 @@ export class AuthService {
     this.removeTokens();
     this._currentUser.set(null);
     this._authStatus.set( AuthStatus.notAuthenticated )
+  }
+
+  recoveryPassword( email: string ) {
+    const url = `${this.apiUrl}/auth/forgot-password`;
+
+    return this.http.post<ForgotPassword>( url, email ).pipe(
+      map( resp => resp.message ),
+      catchError( error => throwError( () => error.error.message ) )
+    )
+  }
+
+  changePassword( id: string, passwordContent: PasswordContent ) {
+
+    const { password } = passwordContent;
+    const url = `${this.apiUrl}/auth/reset-password`;
+
+    return this.http.post<ResetPassword>( url, { id, password } ).pipe(
+      map( resp => resp.message ),
+      catchError( error => throwError( () => error.error.message ) )
+    )
   }
 
   private getRefreshToken() {
