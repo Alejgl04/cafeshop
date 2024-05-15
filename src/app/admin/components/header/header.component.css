@@ -4,6 +4,11 @@
   min-width: 30%;
   border-right: 1px solid #ccc;
 }
+
+.mat-drawer-side {
+  background-color: var(--main-color);
+
+}
 .drawer .header {
   position: absolute;
   right: 0;

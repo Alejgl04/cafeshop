@@ -28,18 +28,30 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.menuItems = [
+      {
+         text: 'Dashboard',
+         route: 'dashboard',
+         icon: 'home'
+      },
      {
-       text: 'Users',
-       route: 'users',
-       icon: 'group_add'
+        text: 'Users',
+        route: 'users',
+        icon: 'group_add'
      },
      {
-       text: 'Dashboard',
-       route: 'dashboard'
+        text: 'Products',
+        route: 'products',
+        icon: 'dashboard'
      },
      {
-       text: 'Products',
-       route: 'products'
+        text: 'Categories',
+        route: 'categories',
+        icon: 'category'
+     },
+     {
+        text: 'Bill',
+        route: 'bills',
+        icon: 'receipt_long'
      },
     ]
   }

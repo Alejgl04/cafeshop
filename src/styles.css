@@ -74,7 +74,6 @@ button:focus {
 }
 
 .bg-admin {
-  background-color: var(--main-color);
   padding: 2rem;
-  color: white;
+  color: var(--main-color);
 }

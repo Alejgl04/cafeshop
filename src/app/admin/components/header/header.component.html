@@ -8,11 +8,12 @@
       <mat-icon class="close"
      (click)="drawer.close()">close</mat-icon>
     </mat-toolbar>
-    <div class="contents p-3 m-2">
-      <mat-list class="">
+    <div class="">
+      <mat-list>
         @for (item of menuItems; track $index) {
-          <mat-list-item>
+          <mat-list-item class="">
             <a
+            class="text-white"
             [routerLink]="item.route"
             routerLinkActive="bg-admin"
             >
@@ -47,6 +48,9 @@
   </div>
 
   <div class="main contents">
-    <router-outlet/>
+    <div class="container">
+      <router-outlet/>
+
+    </div>
   </div>
 </mat-drawer-container>
