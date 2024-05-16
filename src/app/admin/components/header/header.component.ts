@@ -1,15 +1,15 @@
 import { Component, OnInit, computed, inject } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { AuthService } from '../../../auth/services/auth.service';
-import { MenuItem } from '../../interfaces/menu-items';
-import { MatListModule } from '@angular/material/list';
-import { MatDividerModule } from '@angular/material/divider';
+import { MenuItem } from '../../interfaces';
 
 @Component({
   selector: 'app-header',
@@ -25,7 +25,6 @@ export class HeaderComponent implements OnInit {
   public menuItems: MenuItem[] = [];
 
   public currentUser = computed( () => this.authService.currentUser() );
-
   ngOnInit(): void {
     this.menuItems = [
       {
@@ -33,26 +32,26 @@ export class HeaderComponent implements OnInit {
          route: 'dashboard',
          icon: 'home'
       },
-     {
+      {
         text: 'Users',
         route: 'users',
         icon: 'group_add'
-     },
-     {
+      },
+      {
         text: 'Products',
         route: 'products',
         icon: 'dashboard'
-     },
-     {
+      },
+      {
         text: 'Categories',
         route: 'categories',
         icon: 'category'
-     },
-     {
+      },
+      {
         text: 'Bill',
         route: 'bills',
         icon: 'receipt_long'
-     },
+      },
     ]
   }
 

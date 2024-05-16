@@ -72,18 +72,19 @@ export class AuthService {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
 
     return this.http.get<CheckTokenResponse>(url, { headers })
-      .pipe(
-        map( ({ user, token }) => this.setAuthentication(user, token)),
-        catchError(() => {
+    .pipe(
+      map( ({ user, token }) => this.setAuthentication(user, token)),
+      catchError((error) => {
+          console.log(error);
           this._authStatus.set( AuthStatus.notAuthenticated )
           return of(false)
         })
     );
   }
 
-  tokenInterceptor() {
+  AuthtokenInterceptor() {
     const url  = `${this.apiUrl}/auth/refresh`;
-    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getRefreshToken() || ''}`  );
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${this.getRefreshToken() || ''}`);
 
     return this.http.post<RegisterResponse>(url, { headers } ).pipe(
         map( ({ user, token }) => this.setAuthentication(user, token)),
@@ -117,13 +118,13 @@ export class AuthService {
     )
   }
 
+  getJwtToken() {
+    return localStorage.getItem(this.JWT_TOKEN) || '';
+  }
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
 
-  private getJwtToken() {
-    return localStorage.getItem(this.JWT_TOKEN) || '';
-  }
 
   private storeTokens(tokens: string) {
     localStorage.setItem(this.JWT_TOKEN, tokens);

@@ -12,6 +12,7 @@ import { ProductsComponent } from './admin/pages/products/products.component';
 import { CategoriesComponent } from './admin/pages/categories/categories.component';
 import { BillsComponent } from './admin/pages/bills/bills.component';
 import { ResetPasswordComponent } from './auth/pages/reset-password/reset-password.component';
+import { AuthGuard } from '../../../../angular/servicesRouteApp/src/app/guards/auth.guard';
 
 export const routes: Routes = [
   {
@@ -55,7 +56,7 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [authGuard],
-    component: AdminComponent,
+    loadComponent: () => import('./admin/admin.component').then( m => m.AdminComponent ),
     children: [
       {
         path: 'users',

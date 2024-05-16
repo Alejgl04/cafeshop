@@ -41,6 +41,7 @@ export class SignInComponent {
     this.authService.sigIn( email, password )
     .subscribe({
       next: value => {
+        console.log(value);
         this.messagesService.authMessages(`Sign In successfully`);
         this.isLoading = false;
       },
