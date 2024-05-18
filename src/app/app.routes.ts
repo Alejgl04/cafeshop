@@ -56,29 +56,35 @@ export const routes: Routes = [
   {
     path: 'admin',
     canActivate: [authGuard],
+    canLoad: [AuthGuard],
     loadComponent: () => import('./admin/admin.component').then( m => m.AdminComponent ),
     children: [
       {
+        canActivate: [authGuard],
         path: 'users',
         title: 'CafeZone | User Panel',
         component: UsersComponent,
       },
       {
+        canActivate: [authGuard],
         path: 'dashboard',
         title: 'CafeZone | Dashboard Panel',
         component: DashboardComponent,
       },
       {
+        canActivate: [authGuard],
         path: 'products',
         title: 'CafeZone | Product Panel',
         component: ProductsComponent,
       },
       {
+        canActivate: [authGuard],
         path: 'categories',
         title: 'CafeZone | Category Panel',
         component: CategoriesComponent,
       },
       {
+        canActivate: [authGuard],
         path: 'bills',
         title: 'CafeZone | Bill Panel',
         component: BillsComponent,

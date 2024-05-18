@@ -41,13 +41,12 @@ export class SignInComponent {
     this.authService.sigIn( email, password )
     .subscribe({
       next: value => {
-        console.log(value);
         this.messagesService.authMessages(`Sign In successfully`);
         this.isLoading = false;
       },
       complete: () => {
         this.signInForm.reset();
-        this.router.navigateByUrl('/admin');
+        // this.router.navigateByUrl('/admin');
       },
       error: error => {
         this.messagesService.authMessages(`${error}`);
