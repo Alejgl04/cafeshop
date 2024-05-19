@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from '../../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AuthService } from '../../auth/services/auth.service';
+import { DashboardCount } from '../interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +18,6 @@ export class DashboardService {
 
 
   getAllCounts() {
-    return this.http.get(`${this.apiUrl}/dashboard`, { headers: this.headers });
+    return this.http.get<DashboardCount>(`${this.apiUrl}/dashboard`, { headers: this.headers });
   }
 }

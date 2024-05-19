@@ -24,9 +24,6 @@
 }
 
 .main.header {
-  position: fixed;
-  top: 0;
-  width: 100%;
   border-bottom: 1px solid #ccc;
   justify-content: space-between;
 

@@ -6,24 +6,28 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { DashboardService } from '../../services/dashboard.service';
 import { DashboardCount } from '../../interfaces';
+import { CardDasboardComponent } from '../../components/card-dasboard/card-dasboard.component';
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatButtonModule, MatProgressSpinnerModule],
+  imports: [CommonModule, MatProgressSpinnerModule, CardDasboardComponent, LoadingComponent],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css'
 })
 export class DashboardComponent implements OnInit{
 
-  public isLoading: boolean = false;
   private dashboardService = inject(DashboardService);
+  public isLoading: boolean = false;
   public dashboardCount?: DashboardCount;
+
 
   ngOnInit(): void {
     this.dashboardService.getAllCounts().subscribe(
-      response => {
-        console.log(response  );
+      (response) => {
+        this.isLoading = true;
+        this.dashboardCount = response;
       }
     )
   }

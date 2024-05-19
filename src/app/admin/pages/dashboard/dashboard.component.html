@@ -1,31 +1,10 @@
-<div class="row">
-  <div class="loading">
-    <mat-spinner></mat-spinner>
-    Loading Data..
+@if ( !this.isLoading ) {
+  <div class="row d-block">
+    <app-loading></app-loading>
   </div>
-</div>
-<!-- <div class="row">
-  <div class="col-md-4">
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Actions Buttons</mat-card-title>
-        <mat-card-subtitle>Start</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-actions>
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
-    <br>
-    <mat-card>
-      <mat-card-header>
-        <mat-card-title>Actions Buttons</mat-card-title>
-        <mat-card-subtitle>End</mat-card-subtitle>
-      </mat-card-header>
-      <mat-card-actions align="end">
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
-      </mat-card-actions>
-    </mat-card>
+}
+@else if( this.isLoading ) {
+  <div>
+    <app-card-dasboard [dashboardItems]="dashboardCount"></app-card-dasboard>
   </div>
-</div> -->
+}
