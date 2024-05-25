@@ -6,8 +6,7 @@
         <mat-card-subtitle>{{ dashboardItems?.products }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions align="end">
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+          <button mat-flat-button color="accent" class="w-100" [routerLink]="['/admin/products']">View Product</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -18,8 +17,7 @@
         <mat-card-subtitle>{{ dashboardItems?.categories }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions align="end">
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+          <button mat-flat-button color="accent" class="w-100" [routerLink]="['/admin/categories']">View Category</button>
       </mat-card-actions>
     </mat-card>
   </div>
@@ -30,8 +28,7 @@
         <mat-card-subtitle>{{ dashboardItems?.bills }}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-actions align="end">
-        <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button>
+          <button mat-flat-button color="accent" class="w-100" [routerLink]="['/admin/bills']">View Bills</button>
       </mat-card-actions>
     </mat-card>
   </div>
