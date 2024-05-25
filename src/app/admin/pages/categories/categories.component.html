@@ -1,1 +1,10 @@
-<p>categories works!</p>
+@if ( !this.isLoading ) {
+  <div class="row d-block">
+    <app-loading></app-loading>
+  </div>
+}
+@else if( this.isLoading ) {
+  <div>
+    <app-table [categoriesSource]="categoriesSource"></app-table>
+  </div>
+}

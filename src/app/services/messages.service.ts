@@ -12,5 +12,9 @@ export class MessagesService {
     this._snackBar.open(message, 'Accept');
   }
 
+  confirmMessages( message: string ) {
+    this._snackBar.open(message, 'Accept');
+  }
+
 
 }

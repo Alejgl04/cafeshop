@@ -77,3 +77,7 @@ button:focus {
   padding: 2rem;
   color: var(--main-color);
 }
+
+.cursor-click {
+  cursor: pointer;
+}
