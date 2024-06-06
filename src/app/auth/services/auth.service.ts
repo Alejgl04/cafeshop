@@ -1,12 +1,12 @@
 import { Injectable, computed, effect, inject, signal } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import { Observable, catchError, map, of, tap, throwError } from 'rxjs';
+import { Observable, catchError, map, of, throwError } from 'rxjs';
 
 import { environment } from '../../../environments/environment.development';
 
 import { AuthStatus, CheckTokenResponse, ForgotPassword, PasswordContent, RegisterResponse, ResetPassword, SignInResponse, User } from '../interfaces/';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -101,8 +101,9 @@ export class AuthService {
     return this.http.get<CheckTokenResponse>(url, { headers })
       .pipe(
         map(({ user, token }) => this.setAuthentication(user, token)),
-        catchError((error) => {
+        catchError(() => {
           this._authStatus.set(AuthStatus.notAuthenticated)
+          this.logOut();
           return of(false)
         })
       );
@@ -147,10 +148,10 @@ export class AuthService {
   getJwtToken() {
     return localStorage.getItem(this.JWT_TOKEN) || '';
   }
+
   private getRefreshToken() {
     return localStorage.getItem(this.REFRESH_TOKEN);
   }
-
 
   private storeTokens(tokens: string) {
     this.removeTokens();

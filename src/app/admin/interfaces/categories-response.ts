@@ -3,3 +3,8 @@ export interface CategoriesResponse {
   name:   string;
   status: boolean;
 }
+
+export interface CategoryCreate {
+  ok: boolean;
+  message: string;
+}

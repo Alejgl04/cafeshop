@@ -5,6 +5,9 @@
 }
 @else if( this.isLoading ) {
   <div>
-    <app-table [categoriesSource]="categoriesSource"></app-table>
+    <app-table
+      [categoriesSource]="categoriesSource"
+      (openDialog)="addCategory()"
+    ></app-table>
   </div>
 }

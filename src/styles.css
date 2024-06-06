@@ -43,6 +43,7 @@ input[type="color"]:focus,
 
 button:focus {
   border-color: #b68834!important;
+  outline: 0 none;
 }
 
 /*==== LOADING ====*/

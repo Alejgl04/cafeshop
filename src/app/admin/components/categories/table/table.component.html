@@ -6,7 +6,7 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="Cake" #input>
   </mat-form-field>
   <div class="d-flex justify-content-end">
-    <button mat-flat-button color="accent">Add Category</button>
+    <button mat-flat-button color="accent" (click)="openModal()">Add Category</button>
   </div>
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="categoriesSource" matSort>

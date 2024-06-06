@@ -1,1 +1,27 @@
-<p>dialog works!</p>
+<mat-dialog-content class="mat-typography">
+  <div class="auth__form" id="mc_embed_signup">
+    <h2 mat-dialog-title>Add new category</h2>
+    <form autocomplete="off" [formGroup]="addCategoryForm" (ngSubmit)="onSubmit();">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="name" class="form-control" id="name" formControlName="name" aria-describedby="nameHelp">
+        @if (isValidField('name')) {
+          <p class="form-text text-danger">
+            {{getFieldError('name')}}
+          </p>
+        }
+      </div>
+      @if ( isLoading() ) {
+        <div class="mt-2">
+          <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        </div>
+      }
+      <span matSnackBarLabel> </span>
+      <mat-dialog-actions align="end">
+        <button mat-button mat-dialog-close color="primary">Cancel</button>
+        <button type="submit" class="btn btn-default form__submit-auth">submit</button>
+      </mat-dialog-actions>
+    </form>
+  </div>
+  </mat-dialog-content>
+

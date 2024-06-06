@@ -2451,7 +2451,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 .review-area, .sign-up-area {
   background-color: #b68834;
   color: #fff;
-  height: 100vh;
+  height: 100%;
 }
 
 .review-area h1, .review-area h4 {

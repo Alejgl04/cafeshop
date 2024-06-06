@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewChild, Input } from '@angular/core';
+import { Component, AfterViewInit, ViewChild, Input, Output, EventEmitter } from '@angular/core';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
@@ -16,9 +16,10 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrl: './table.component.css'
 })
 export class TableComponent {
-  @Input() categoriesSource = new MatTableDataSource<CategoriesResponse>([]);
   displayedColumns: string[] = ['id', 'name', 'actions'];
 
+  @Input() categoriesSource = new MatTableDataSource<CategoriesResponse>([]);
+  @Output() openDialog = new EventEmitter<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -35,6 +36,10 @@ export class TableComponent {
     if (this.categoriesSource.paginator) {
       this.categoriesSource.paginator.firstPage();
     }
+  }
+
+  openModal(): void {
+    this.openDialog.emit();
   }
 
   editCategory( id: string ): void {
