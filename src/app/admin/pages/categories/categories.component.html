@@ -8,6 +8,7 @@
     <app-table
       [categoriesSource]="categoriesSource"
       (openDialog)="addCategory()"
+      (showEditDialog)="showEditForm($event)"
     ></app-table>
   </div>
 }

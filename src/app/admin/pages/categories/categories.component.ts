@@ -4,12 +4,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 
-import { CategoriesResponse } from '../../interfaces';
+import { Category } from '../../interfaces';
 import { CategoriesService } from '../../services/categories.service';
 import { MessagesService } from '../../../services/messages.service';
 import { LoadingComponent } from '../../components/loading/loading.component';
 import { TableComponent } from '../../components/categories/table/table.component';
 import { DialogComponent } from '../../components/categories/dialog/dialog.component';
+import { EditDialogComponent } from '../../components/categories/edit-dialog/edit-dialog.component';
 
 @Component({
   selector: 'app-categories',
@@ -24,7 +25,7 @@ export class CategoriesComponent implements OnInit {
   public dialog = inject(MatDialog);
 
   public isLoading: boolean = false;
-  public categoriesSource = new MatTableDataSource<CategoriesResponse>([]);
+  public categoriesSource = new MatTableDataSource<Category>([]);
 
   ngOnInit(): void {
     this.categories();
@@ -45,7 +46,27 @@ export class CategoriesComponent implements OnInit {
   }
 
   addCategory(): void {
-    this.dialog.open(DialogComponent);
+    const dialogRef = this.dialog.open(DialogComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.categories();
+    });
+  }
+
+  showEditForm(id: string): void {
+    this.categoriesService.getCategoryById(id).subscribe({
+      next: data => {
+        const dialogRef = this.dialog.open(EditDialogComponent, {
+          data
+        }
+      );
+      dialogRef.afterClosed().subscribe(result => {
+        this.categories();
+        });
+      },
+    })
+
+
   }
 }
 

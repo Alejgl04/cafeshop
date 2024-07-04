@@ -4,7 +4,7 @@ import {MatSort, MatSortModule} from '@angular/material/sort';
 import {MatTableDataSource, MatTableModule} from '@angular/material/table';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { CategoriesResponse } from '../../../interfaces';
+import { Category } from '../../../interfaces';
 import { CommonModule } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -18,8 +18,9 @@ import { MatIconModule } from '@angular/material/icon';
 export class TableComponent {
   displayedColumns: string[] = ['id', 'name', 'actions'];
 
-  @Input() categoriesSource = new MatTableDataSource<CategoriesResponse>([]);
+  @Input() categoriesSource = new MatTableDataSource<Category>([]);
   @Output() openDialog = new EventEmitter<string>();
+  @Output() showEditDialog = new EventEmitter<string>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -43,6 +44,6 @@ export class TableComponent {
   }
 
   editCategory( id: string ): void {
-    console.log(id);
+    this.showEditDialog.emit(id);
   }
 }

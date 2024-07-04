@@ -1,50 +1,54 @@
-import { Component, inject, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Component, Inject, inject, signal } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-
 import { MatButtonModule } from '@angular/material/button';
-import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-
+import { MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MessagesService } from '../../../../services/messages.service';
 import { ValidatorsService } from '../../../../services/validators.service';
 import { CategoriesService } from '../../../services/categories.service';
-import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { Category } from '../../../interfaces';
 
 @Component({
-  selector: 'app-dialog',
+  selector: 'app-edit-dialog',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, MatDialogModule, MatButtonModule, MatProgressBarModule],
-  templateUrl: './dialog.component.html',
-  styleUrl: './dialog.component.css'
+  templateUrl: './edit-dialog.component.html',
+  styleUrl: './edit-dialog.component.css'
 })
-export class DialogComponent {
+export class EditDialogComponent {
   private fb              = inject( FormBuilder );
   private messagesService = inject( MessagesService );
   private validMessages   = inject( ValidatorsService );
-  private categoryService = inject(CategoriesService)
+  private categoryService = inject( CategoriesService );
+
+  constructor(
+    public MatDialogRef: MatDialogRef<EditDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: Category,
+  ) {
+  }
 
   public dialog = inject(MatDialog);
   public isLoading = signal(false);
 
-  public addCategoryForm: FormGroup = this.fb.group({
-    name: ['', [Validators.required]],
+  public updateCategoryForm: FormGroup = this.fb.group({
+    name: [this.data.name, [Validators.required]],
   });
 
   onSubmit(): void {
-    if ( this.addCategoryForm.invalid ) {
-      this.addCategoryForm.markAllAsTouched();
+    if ( this.updateCategoryForm.invalid ) {
+      this.updateCategoryForm.markAllAsTouched();
       return;
     }
-    const { name } = this.addCategoryForm.value;
     this.isLoading.set(true);
-    this.categoryService.saveNewCategory(name)
+    this.categoryService.updateCategory(this.updateCategoryForm.value, this.data.id)
     .subscribe({
       next: value => {
         this.messagesService.confirmMessages(`${value},`);
         this.isLoading.set(false);
       },
       complete: () => {
-        this.addCategoryForm.reset();
+        this.updateCategoryForm.reset();
         this.dialog.closeAll();
 
       },
@@ -56,10 +60,10 @@ export class DialogComponent {
   }
 
   isValidField( field: string ): boolean | null {
-    return this.validMessages.isValidField( this.addCategoryForm, field);
+    return this.validMessages.isValidField( this.updateCategoryForm, field);
   }
 
   getFieldError( field: string ): string | null {
-    return this.validMessages.getFieldError( this.addCategoryForm, field)
+    return this.validMessages.getFieldError( this.updateCategoryForm, field)
   }
 }
